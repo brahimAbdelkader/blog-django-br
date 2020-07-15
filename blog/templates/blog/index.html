@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %} 
+{% load static %} {% block content%} 
+{% if messages%} 
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+  {{ message }}
+</div>
+{% endfor %} {% endif %}
+ {% for post in posts%}
+
+
+   
+<div class="border p-3 mb-4 post bg-white see_more_blog pb-15" >
+  
+  <div class="image_author">
+        <div   class="image_detail">
+          <img src="{{ post.author.profile.image.url}}" alt="nothing" width="65px" class="img-fluid rounded-circle border m-2"
+            style="width: 120px;height:120px" />
+        </div>
+
+        <div class="author">
+              <div class="span-author">
+              <span class="text-secondary"> نشر في : {{ post.post_date|date:"d-m-Y" }}</span>
+              </div>
+              <div class="span-author">
+              <span class="text-secondary"> اسم الناشر : {{ post.author }}</span>
+
+              </div>
+        </div>
+  {% if request.user == post.author %}
+  <div style="float: left;" 
+  class='mt-2 p-2'>
+    <a class='btn btn-success' href="{% url 'update_post' post.id  %} ">تعديل تدوينة </a>
+    <a class='btn btn-danger' href="{% url 'delete_post' post.id   %} ">حدف تدوينة </a>
+  </div>
+  {% endif %}
+  </div>
+
+
+
+    <!-- ############################################# -->
+  <h3>
+    <a href="{% url 'detail' post.id %}" class="text-dark mb-5 pr-2 font-weight-bold">{{ post.title }}</a>
+  </h3>
+  <img src="{{ post.image.url }}"
+    style="width:695px;height:400px"
+    class='mb-4 mt-2 img-thumbnail'
+   alt="صورة الموضوع">
+
+  <p class='pr-3'>{{ post.content|truncatechars:160 }}</p> 
+  <div  style="text-align: left; padding-left:35px;">
+  <a class='ml-10 see_more' id='see_more' href="{% url 'detail' post.id %}">تفاصيل أكثر</a>
+  </div>
+</div>
+
+
+{% endfor %} 
+{% include 'blog/pagination.html' with page=posts %} 
+{% endblock %}

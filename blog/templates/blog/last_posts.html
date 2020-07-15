@@ -1,0 +1,13 @@
+
+
+<ul class="list-group-flush last-post  ">
+{% for post in l_posts %}
+
+    <a href="{% url 'detail' post.id %}"  class="text-dark">
+        <li class="list-group-item last-post-item border-bottom">{{ post.title|truncatechars:40 }}</li>
+    </a>
+
+
+{% endfor %}
+
+</ul>

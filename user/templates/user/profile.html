@@ -1,0 +1,73 @@
+{% extends 'blog/base.html' %} {% load static %} {% block content %}
+
+{% if messages%}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+  {{ message }}
+</div>
+{% endfor %} {% endif %}
+<div class="row border p-2">
+  <div class="col-md-3 text-center">
+    <img
+      src=" {{ user.profile.image.url }}"
+      alt="nothing"
+      width="120px"
+      class="img-fluid border mt-2 rounded-circle"
+      style="width: 120px;height:120px"
+    />
+    <a class="btn btn-secondary mt-4 mb-4" href="{% url 'profile_update' %}"
+      ><i class="fas fa-edit ml-1"></i> تعديل
+    </a>
+  </div>
+
+  <div class="col-md-9">
+    <h2 class="mb-3">{{user.username}}</h2>
+    <p class="font-weight-bold">
+      الاسم الكامل :
+      <span class="font-weight-normal"
+        >{{ user.first_name}} {{ user.last_name}}
+      </span>
+    </p>
+    <p class="font-weight-bold">
+      البريد الالكتروني :
+      <span class="font-weight-normal"> {{ user.email }}</span>
+    </p>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md">
+    <div class="">
+      <h3 class="mb-1 border-bottom pb-2">اجمالي التدوينات التي دونتها</h3>
+      <div class="bg-secondary text-center mt-3 blog_number">
+        <span class="">
+          {{ posts.count }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md">
+    <div class="border-bottom">
+      <h3 class="mb-1 border-bottom pb-2">تدويناتي</h3>
+      {% for post in post_list %}
+
+      <ul class="list-unstyled mt-3 mb-2">
+        <li>
+          <a class="text-dark" href="{% url 'detail' post.id %}"
+            >{{ post.title }}</a
+          >
+        </li>
+      </ul>
+      {% empty %}
+      <h4 class="text-center mb-4 mt-3">لا يوجد تدوينات</h4>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% if posts %}
+{% include 'blog/pagination.html' with page=post_list %}
+{% endif%}
+{% endblock content %}

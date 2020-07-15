@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<h3 class="border-bottom pb-3 mb-4 mt-4">تعديل</h3>
+
+<div class="border p-4 mb-3 mt-3">
+    <form class=" " method="POST" novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        {{user_form|crispy}}
+        <!-- {{profile_form|crispy}} -->
+        <div>
+          <span class="mb-2" style="display:block"> صورة الملف الشخصي* </span>
+          <span style="display:block">  لمعاينة الصورة الحالية  <a href="{{ user.profile.image.url }}">من هنا </a></span>
+          <label for="image" class ='btn btn-outline-secondary mt-2'>اختيار الصورة</label>
+          <input  name= 'image' type='file' id ='image' accept ='image/*' style="display:none">
+         
+        </div>
+        <input class="btn btn-secondary mt-2" type="submit" value="تعديل " />
+       
+    </form>
+</div>
+
+{% endblock content %}

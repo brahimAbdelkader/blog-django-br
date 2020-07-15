@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<h5 class="border-bottom pb-3 mb-4 mt-4"> هل انت متأكد من حذف هذا المنشور</h5>
+
+<div class="border p-4 mb-3 mt-3">
+    <form class=" " method="POST" novalidate>
+        {% csrf_token %}
+    
+        <input class="btn btn-danger" type="submit" value="تأكيد الحذف  " />
+        <a  class="btn btn-secondary" href="{% url 'index'  %}">الغاء الحذف</a>
+    
+    </form>
+</div>
+
+{% endblock content %}

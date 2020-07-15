@@ -1,0 +1,16 @@
+<div class="row text-center mt-3">
+  <div class="col-md mb-10">
+    {% if page.has_next %}
+    <a class="btn btn-secondary pl-3 pr-3 ml-4" href="?page={{ page.next_page_number }}">التالي</a>
+    {%else  %}
+    <a class="btn btn-secondary pl-3 pr-3 ml-4 disabled" href="#">التالي</a>
+    {% endif %}
+    الصفحة<span class="font-weight-bold pr-1 pl-1"> {{page.number}} </span> من
+    <span class="font-weight-bold pr-1 pl-1"> {{page.paginator.num_pages}} </span>
+    {% if page.has_previous %}
+    <a class="btn btn-secondary pl-3 pr-3 mr-4" href="?page={{ page.previous_page_number }}">السابق</a>
+    {%else  %}
+    <a class="btn btn-secondary pl-3 pr-3 mr-4 disabled" href="#">السابق</a>
+    {% endif %}
+  </div>
+</div>

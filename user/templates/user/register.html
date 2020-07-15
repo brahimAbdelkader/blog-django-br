@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+ {% load static %} 
+ {% block content %} 
+ {% load crispy_forms_tags %}
+
+<h3 class="border-bottom pb-3 mb-4 mt-4">تسجيل</h3>
+
+<div class="border p-4 mb-3 mt-3">
+  <form class=" " method="POST" novalidate>
+    {% csrf_token %} 
+    {{form|crispy}}
+    <input class="btn btn-secondary" type="submit" value="تسجيل  " />
+    <div class="border-top mt-4 pt-2">
+      <small>اذا كان لديك حساب يمكنك <a href=" {% url 'login' %}">تسجيل الدخول من هنا</a></small>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}

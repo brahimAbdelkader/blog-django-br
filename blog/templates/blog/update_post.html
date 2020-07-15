@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+ {% load static %} {% block content %}
+  {% load crispy_forms_tags %}
+
+<h3 class="border-bottom pb-3 mb-4 mt-4">تعديل تدوينة</h3>
+
+<div class="border p-4 mb-3 mt-3">
+  <form class=" " method="POST" novalidate>
+    {% csrf_token %} {{form|crispy}}
+    <input class="btn btn-secondary" type="submit" value="تعديل " />
+  </form>
+</div>
+
+{% endblock content %}
